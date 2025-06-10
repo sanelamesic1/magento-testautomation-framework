@@ -49,7 +49,7 @@ test.describe('Verify user is able to add, remove or edit wishlist', () => {
         expect(await searchPage.isSearchedItemVisible(searchedItems.chosenItem)).toBeTruthy;
         await searchPage.clickProductByName(searchedItems.chosenItem);
         await searchPage.addToWishlist();
-        expect(await myWishlistPage.verifyItemIsAddedToWishlist()).toBeTruthy;
+        expect(await myWishlistPage.verifySuccessMessageForWishlistAdding()).toBeTruthy;
         expect(await myWishlistPage.isItemDisplayedInWishlist(searchedItems.chosenItem)).toBeTruthy;
 
     });

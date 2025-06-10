@@ -17,8 +17,7 @@ export class MyWishlistPage extends BasePage {
         this.removeButtons = page.locator('.actions-secondary .btn-remove.action.delete');
     }
 
-    async verifyItemIsAddedToWishlist(): Promise<boolean> {
-
+    async verifySuccessMessageForWishlistAdding(): Promise<boolean> {
         // Wait for the success message to appear
         await this.successMessageLocator.isVisible({ timeout: 5000 });
         const successMessageText = await this.successMessageLocator.innerText();
