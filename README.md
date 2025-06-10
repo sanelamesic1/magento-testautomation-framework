@@ -53,6 +53,10 @@ Generate Playwright Report
 ```
 npx playwright show-report
 ```
+Run one specific test file (e.g.)
+```
+npx playwright test tests/shoppingCart.test.ts
+```
 
 ## Test Structure
 ```/tests/ ``` → Contains Playwright test cases
