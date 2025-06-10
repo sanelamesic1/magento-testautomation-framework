@@ -9,7 +9,11 @@ export class BasePage {
     }
 
     async isCurrentUrlEndingWith(expectedExtension: string): Promise<boolean> {
-        return this.page.url().endsWith(expectedExtension);        
+        return this.page.url().endsWith(expectedExtension);
+    }
+
+    async isCurrentUrlContaining(expectedSubstring: string): Promise<boolean> {
+        return this.page.url().includes(expectedSubstring);
     }
 
     async navigateTo(url: string): Promise<void> {
@@ -18,27 +22,26 @@ export class BasePage {
     async getTitle(): Promise<string> {
         return await this.page.title();
     }
-    async getUrl(): Promise<string> {   
+    async getUrl(): Promise<string> {
         return this.page.url();
     }
-    async waitForSelector(selector: string): Promise<void> {
-        await this.page.waitForSelector(selector, { state: 'visible' });
+
+    // String formatter
+    public format(template: string, ...args: string[]): string {
+        let i = 0;
+        return template.replace(/%s/g, () => args[i++]);
     }
-    async click(selector: string): Promise<void> {
-        const element = this.page.locator(selector);
-        await element.click();
+
+    async waitForLoadState(): Promise<void> {
+        await this.page.waitForLoadState('networkidle');
     }
-    async fill(selector: string, text: string): Promise<void> {             
-        const element = this.page.locator(selector);
-        await element.fill(text);
-    }
-    async getText(selector: string): Promise<string> {
-        const element = this.page.locator(selector);
-        return await element.textContent() || '';
-    }
-    async isVisible(selector: string): Promise<boolean> {
-        const element = this.page.locator(selector);
-        return await element.isVisible();
+
+    async scrollPage(scrollAmount: number = 1000): Promise<void> {
+        await this.page.evaluate((amount) => {
+            window.scrollBy({ top: amount, behavior: 'smooth' });
+        }, scrollAmount);
+
+        await this.page.waitForTimeout(500); // Short delay for UI stabilization
     }
 
 }

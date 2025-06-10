@@ -27,6 +27,7 @@ export class LoginPage extends BasePage {
     await this.emailInput.fill(email);
     await this.passwordInput.fill(password);
     await this.signInButton.click();
+    await this.page.waitForTimeout(3000); // Short delay for UI processing
   }
 
   async isMyAccountVisible(): Promise<boolean> {

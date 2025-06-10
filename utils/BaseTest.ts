@@ -1,12 +1,10 @@
-import { Browser, BrowserContext, Page, expect } from '@playwright/test';
+import { Browser, BrowserContext, Locator, Page, expect } from '@playwright/test';
 import dotenv from 'dotenv';
 import { LoginPage } from '../pages/LoginPage';
-import { testUsers } from '../utils/TestData';
-import { MyAccountPage } from '../pages/MyAccountPage';
 
 dotenv.config();
 
-export class TestSetup {
+export class BaseTest {
   private browser: Browser;
   private context!: BrowserContext;
   public page!: Page;
@@ -14,21 +12,12 @@ export class TestSetup {
 
   constructor(browser: Browser) {
     this.browser = browser;
+
   }
 
-  async init() {
+  async setupTest() {
     console.log('Initializing test setup...');
-
-    // Create a new browser context
     this.context = await this.browser.newContext();
-
-    // Close Playwright's default blank page if it exists
-    const defaultPages = this.context.pages();
-    if (defaultPages.length > 0) {
-      await defaultPages[0].close();
-    }
-
-    // Open the actual test page
     this.page = await this.context.newPage();
     this.loginPage = new LoginPage(this.page);
   }
@@ -41,7 +30,17 @@ export class TestSetup {
 
     await this.loginPage.navigateToLoginPage();
     await this.loginPage.login(email, password);
-    await this.page.waitForTimeout(5000);
+
+    // Check for the "Invalid Form Key" error and retry login if detected
+    // This is a common issue in Magento when the form key is invalid or expired.
+    // It can happen if the session is stale or if the form key has changed.
+    const formKeyErrorLocator = this.page.locator('.message-error:has-text("Invalid Form Key")');
+    if (await formKeyErrorLocator.isVisible()) {
+      console.warn("Detected 'Invalid Form Key' error. Retrying login...");
+      await this.login(email, password);
+    }
+
+    // Validate login success
     expect(await this.loginPage.isMyAccountVisible()).toBe(true);
     console.log('Login successful. Ready to execute tests.');
   }

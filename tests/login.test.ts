@@ -1,31 +1,39 @@
 import { test, expect } from '@playwright/test';
 import { LoginPage } from '../pages/LoginPage';
 import { testUsers } from '../utils/TestData';
-import { TestSetup } from '../utils/TestSetup';
+import { BaseTest } from '../utils/BaseTest';
+import { BasePage } from 'pages/BasePage';
+import { HeaderPage } from 'pages/HeaderPage';
+import { SearchPage } from 'pages/SearchPage';
+import { CartPage } from 'pages/CartPage';
 
-let setup: TestSetup;
+let baseTest: BaseTest;
+let basePage: BasePage;
+let loginPage: LoginPage;
 
-test.beforeAll(async ({ browser }) => {
-    console.log('Before tests ---- ');
+// Execute before each test: Initialize fresh test setup
+test.beforeEach(async ({ browser }) => {
+ baseTest = new BaseTest(browser); 
+    await baseTest.setupTest();
 
-    // Initialize TestSetup and reuse context/page
-    setup = new TestSetup(browser);
-    await setup.init();
-    await setup.login();
+  // Initialize page objects with fresh session
+  basePage = new BasePage(baseTest.page);
+  loginPage = new LoginPage(baseTest.page);  // Ensure correct login page instantiation
 });
 
-test.afterAll(async () => {
-    await setup.cleanup();
+// Execute after each test: Clean up browser context
+test.afterEach(async () => {
+  await baseTest.cleanup();
 });
 
 
-test('Verify there is an error message when log in with invalid data', async () => {
-  const loginPage = new LoginPage(setup.page);
-  const { email, password } = testUsers.invalidLoginUser;
+test.describe('Verify login test cases', () => {
+  test('Verify there is an error message when logging in with invalid data', async () => {
+    const { email, password } = testUsers.invalidLoginUser;
 
-  await loginPage.navigateToLoginPage();
-  await loginPage.login(email, password);
+    await loginPage.navigateToLoginPage();
+    await loginPage.login(email, password);
 
-  await expect(loginPage.errorMessage).toBeVisible();
+    await expect(loginPage.errorMessage).toBeVisible();
+  });
 });
-
