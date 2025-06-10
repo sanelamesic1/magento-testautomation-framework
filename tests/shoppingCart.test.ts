@@ -31,11 +31,15 @@ test.beforeEach(async ({ browser }) => {
 
 // Execute after each test: Clean up browser context
 test.afterEach(async () => {
+    console.log('get into afterEach');
+
     await baseTest.cleanup();
 });
 
 test.describe('Verify user is able to proceed with search and shop of an item', () => {
     
+    console.log('get into describe Verify user is able to proceed with search and shop of an item');
+
     test('Verify user can log in, search item, add it to cart and proceed to shop', {tag: '@smoke'}, async () => {
         await headerPage.enterSearchText(searchedItems.validSearchItem);
         expect(await searchPage.isCurrentUrlEndingWith(`/catalogsearch/result/?q=${searchedItems.chosenItem}`)).toBeTruthy;

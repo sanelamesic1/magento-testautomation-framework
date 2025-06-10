@@ -40,6 +40,7 @@ test.afterEach(async () => {
 });
 
 test.describe('Verify user is able to add, remove or edit wishlist', () => {
+    console.log('get into describe erify user is able to add, remove or edit wishlist');
 
     test('Verify user can log in, search item and add it to wishlist', { tag: '@regression' }, async () => {
         await myWishlistPage.removeAllWishlistItems(); // Ensure wishlist is empty before starting

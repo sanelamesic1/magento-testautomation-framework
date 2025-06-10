@@ -28,6 +28,7 @@ test.afterEach(async () => {
 });
 
 test.describe('Verify My Account page details', () => {
+  console.log('get into describe Verify My Account page details');
 
   test('Should show My Account page after login with login details', {tag: '@regression'}, async () => {
     const { name } = testUsers.validUserData;
