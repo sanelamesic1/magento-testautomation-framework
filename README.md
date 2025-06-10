@@ -9,7 +9,7 @@ This repository contains a **Playwright-based test automation framework** for te
 ✅ **Parameterized test execution with dynamic data**  
 ✅ **Robust error handling & retry mechanisms**  
 ✅ **CI/CD integration via GitHub Actions**  
-✅ **Reusable utility functions & API validations**  
+✅ **Reusable utility functions**  
 
 ## Installation
 1. Clone the repository:
