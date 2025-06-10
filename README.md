@@ -69,7 +69,7 @@ This framework integrates GitHub Actions for automated test execution on push/pu
 ### Workflow (.github/workflows/playwright.yml)
 
 Under ```playwright.yml``` file is set up workflow for:
-- Installs dependencies & Playwright browsers.
-- Injects environment variables securely via GitHub Secrets.
-- Runs Playwright tests on Ubuntu-latest
-- Stores Playwright reports for debugging as an output of workflow run.There is an artifact playwright-report that can be downloaded and results can be checked.
+- Install dependencies & Playwright browsers
+- Inject environment variables securely via GitHub Secrets
+- Run Playwright tests on Ubuntu-latest
+- Store Playwright reports for debugging as an output of workflow run. There is an artifact playwright-report that can be downloaded and results can be checked.
