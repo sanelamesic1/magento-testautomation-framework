@@ -28,7 +28,7 @@ test.afterEach(async () => {
 
 
 test.describe('Verify login test cases', () => {
-  test('Verify there is an error message when logging in with invalid data', async () => {
+  test('Verify there is an error message when logging in with invalid data', {tag: '@regression'}, async () => {
     const { email, password } = testUsers.invalidLoginUser;
 
     await loginPage.navigateToLoginPage();
