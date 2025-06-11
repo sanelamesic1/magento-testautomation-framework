@@ -42,8 +42,7 @@ test.afterEach(async () => {
 test.describe('Verify user is able to add, remove or edit wishlist', () => {
 
     test('Verify user can log in, search item and add it to wishlist', { tag: '@regression' }, async () => {
-        await myWishlistPage.removeAllWishlistItems(); // Ensure wishlist is empty before starting
-
+        
         await headerPage.enterSearchText(searchedItems.validSearchItem);
         expect(await searchPage.isCurrentUrlEndingWith(`/catalogsearch/result/?q=${searchedItems.chosenItem}`)).toBeTruthy;
         expect(await searchPage.isSearchedItemVisible(searchedItems.chosenItem)).toBeTruthy;
