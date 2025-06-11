@@ -74,7 +74,9 @@ Test cases are split into smoke and regression suite with added tags in every te
 Under the folder ```test-plan``` there is a file with detail test cases for smoke and regression suite. 
 
 ## CI/CD Setup (GitHub Actions)
-This framework integrates GitHub Actions for automated test execution on push/pull requests.
+This framework integrates GitHub Actions for automated test execution on push/pull requests. 
+
+If needed, under the [path](https://github.com/sanelamesic1/magento-testautomation-framework/actions/workflows/playwright.yml) user can manually execute pipeline too. 
 
 ### Workflow (.github/workflows/playwright.yml)
 
