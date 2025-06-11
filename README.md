@@ -67,6 +67,12 @@ npx playwright test tests/shoppingCart.test.ts
 
 ```/playwright.config.ts``` → Configuration for test execution.
 
+### Test types
+Test cases are split into smoke and regression suite with added tags in every test case.
+
+### Test-plan
+Under the folder ```test-plan``` there is a file with detail test cases for smoke and regression suite. 
+
 ## CI/CD Setup (GitHub Actions)
 This framework integrates GitHub Actions for automated test execution on push/pull requests.
 
@@ -77,3 +83,4 @@ Under ```playwright.yml``` file is set up workflow for:
 - Inject environment variables securely via GitHub Secrets
 - Run Playwright tests on Ubuntu-latest
 - Store Playwright reports for debugging as an output of workflow run. There is an artifact playwright-report that can be downloaded and results can be checked.
+
