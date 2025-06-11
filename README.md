@@ -1,4 +1,4 @@
-# Magento Test Automation Framework
+# Luma Test Automation Framework
 
 ## Overview
 This repository contains a **Playwright-based test automation framework** for testing Luma e-commerce applications. It supports UI testing, login validation, wishlist operations, and overall checkout workflows. Designed for **scalability, maintainability, and efficient debugging**, the framework ensures comprehensive test coverage.
@@ -7,7 +7,7 @@ This repository contains a **Playwright-based test automation framework** for te
 ✅ **Playwright for UI Automation**  
 ✅ **Modular Page Object Model (POM) structure**  
 ✅ **Parameterized test execution with dynamic data**  
-✅ **Robust error handling & retry mechanisms**  
+✅ **Error handling & retry mechanisms**  
 ✅ **CI/CD integration via GitHub Actions**  
 ✅ **Reusable utility functions**  
 
